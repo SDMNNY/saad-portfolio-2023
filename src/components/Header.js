@@ -1,13 +1,15 @@
 import React from 'react';
-import Navigation from './Navigation';
+import Navigation from './Navigation'; 
+import './Header.css';
+
 
 const Header = () => {
-    return (
-        <header>
-            <h1>Your Name</h1>
-            <Navigation />
-        </header>
-    );
+  return (
+    <header className="header">
+      <h1>Your Name or Logo</h1>
+      <Navigation /> {/* Include the Navigation component */}
+    </header>
+  );
 }
 
 export default Header;
