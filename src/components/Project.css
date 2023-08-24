@@ -1,0 +1,21 @@
+.project-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+}
+
+.project-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.project-card a {
+    margin: 5px;
+    text-decoration: none;
+}

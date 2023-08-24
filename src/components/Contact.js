@@ -1,27 +1,90 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import './Contact.css';  // Create a Contact.css file for styling
 
 const Contact = () => {
-    const { register, handleSubmit, errors } = useForm();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-    const onSubmit = (data) => {
-        console.log(data);
+  const [formErrors, setFormErrors] = useState({
+    name: '',
+    email: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Validation
+    if (name === 'email') {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      setFormErrors({
+        ...formErrors,
+        [name]: emailPattern.test(value) ? '' : 'Invalid email address'
+      });
     }
+  };
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input name="name" ref={register({ required: true })} />
-            {errors.name && <span>Name is required</span>}
-            
-            <input name="email" ref={register({ required: true, pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
-            {errors.email && <span>Valid email is required</span>}
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
 
-            <textarea name="message" ref={register({ required: true })}></textarea>
-            {errors.message && <span>Message is required</span>}
+    // Validation for required fields
+    if (!value) {
+      setFormErrors({
+        ...formErrors,
+        [name]: 'This field is required'
+      });
+    }
+  };
 
-            <button type="submit">Send</button>
-        </form>
-    );
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Send formData to server or process it as needed
+    console.log(formData);
+  };
+
+  return (
+    <section className="contact-section">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {formErrors.name && <span className="error">{formErrors.name}</span>}
+        </label>
+
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {formErrors.email && <span className="error">{formErrors.email}</span>}
+        </label>
+
+        <label>
+          Message:
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+          ></textarea>
+        </label>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  );
+};
 
 export default Contact;

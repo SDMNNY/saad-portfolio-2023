@@ -1,25 +1,17 @@
 import React from 'react';
-import Project from './Project';
+import './Project.css';
 
-const Portfolio = () => {
-    const projects = [
-        {
-            title: "Project 1",
-            image: "path/to/image1.jpg",
-            deployed: "http://link-to-deployed-app1.com",
-            github: "http://github-link1.com",
-        },
-        // Add more projects
-    ];
-
+const Project = ({ title, image, deployed, github }) => {
     return (
-        <section>
-            {projects.map((project, index) => (
-                <Project key={index} {...project} />
-            ))}
-        </section>
+        <div className="project-card">
+            <h3>{title}</h3>
+            <img src={image} alt={title} />
+            <p>
+                <a href={deployed} target="_blank" rel="noopener noreferrer">Live Demo</a> | 
+                <a href={github} target="_blank" rel="noopener noreferrer">GitHub</a>
+            </p>
+        </div>
     );
 }
 
-export default Portfolio;
-
+export default Project;
