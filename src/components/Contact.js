@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Contact.css';  // Create a Contact.css file for styling
+import './Contact.css';  // Make sure you have this CSS file for styling
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,17 +7,19 @@ const Contact = () => {
     email: '',
     message: ''
   });
-
   const [formErrors, setFormErrors] = useState({
     name: '',
     email: ''
   });
+  // New State variables for loading and success
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Validation
+    // Validation for email
     if (name === 'email') {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       setFormErrors({
@@ -39,10 +41,22 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Send formData to server or process it as needed
-    console.log(formData);
+    setIsLoading(true); // Set loading state
+
+    // Simulate an API call (replace with your actual API call)
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    setIsLoading(false); // Unset loading state
+    setIsSuccess(true);  // Set success state
+
+    // Clear the form data
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
   };
 
   return (
@@ -80,8 +94,12 @@ const Contact = () => {
             onChange={handleChange}
           ></textarea>
         </label>
+        
+        {/* Conditional rendering for loading and success messages */}
+        {isLoading ? <div>Loading...</div> : null}
+        {isSuccess ? <div>Message sent successfully!</div> : null}
 
-        <button type="submit">Send</button>
+        <button type="submit" disabled={isLoading}>Send</button>
       </form>
     </section>
   );
