@@ -1,0 +1,38 @@
+.resume-section {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 40px;
+  }
+  
+  h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  a {
+    color: #0073e6;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  div {
+    margin-bottom: 30px;
+  }
+  
